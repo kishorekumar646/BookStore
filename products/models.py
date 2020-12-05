@@ -13,7 +13,7 @@ class Book(models.Model):
         max_length=255, validators=[BookNameValidator],)
     author = models.CharField(
         max_length=255, validators=[BookAuthorValidator],)
-    image = models.ImageField(
+    image_cover = models.ImageField(
         upload_to='upload_photos/book_photos/', null=True, blank=True)
     description = models.CharField(max_length=255, validators=[
                                         BookNameValidator], null=True, blank=True)
