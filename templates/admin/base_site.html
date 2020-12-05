@@ -1,0 +1,21 @@
+{% extends "admin/base.html" %}
+
+{% load static %}
+
+{% block title %}{{ title }} | {{ site_title }}{% endblock %}
+{% block extrastyle %}
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/styles.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/admin_color.css' %}"/>
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a class="logo" href="{% url 'admin:index' %}">
+        <img src="{% static 'admin/img/book.png' %}" height="40px" />
+        <h1 class="site_header">{{ site_header }}</h1>
+         <h1>{{ super }}</h1>
+    </a>
+</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

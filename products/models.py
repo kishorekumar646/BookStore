@@ -23,3 +23,6 @@ class Book(models.Model):
 
     def __str__(self):
         return '%s - %s' % (self.book_title, self.book_author)
+
+    class Meta:
+        verbose_name = 'Book product'
