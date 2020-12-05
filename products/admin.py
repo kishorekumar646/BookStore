@@ -10,8 +10,8 @@ class BookAdmin(admin.ModelAdmin):
                                     ('image_cover','book_photo_thumbnail'),'price')}),
         (_('Important dates'), {'fields': ('created_at', 'modified_at')}),
     )
-    list_display = ('title','author','created_at')
-    list_filter = ('created_at', 'modified_at')
+    list_display = ('title','author','price','created_at')
+    list_filter = ('price','created_at', 'modified_at')
     search_fields = ('book_title','book_author')
     radio_fields = {'category': admin.HORIZONTAL}
     readonly_fields = ('created_at', 'modified_at','book_photo_thumbnail',)

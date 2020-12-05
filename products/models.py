@@ -36,4 +36,5 @@ class Book(models.Model):
         return mark_safe('<img alt="%s" src="%s" width="70" height="120" />' % (self.title, self.image_cover.url))
 
     class Meta:
+        ordering = ['price']
         verbose_name = 'Book product'
