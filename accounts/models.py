@@ -115,7 +115,7 @@ class UserDocument(models.Model):
         upload_to='upload_photos/documents/')
 
     def user_document_photo_thumbnail(self):
-        return mark_safe('<img alt="%s" src="%s" />' % (self.user, self.user_document_photo))
+        return mark_safe('<img alt="%s" src="%s" width="70" height="120" />' % (self.user, self.user_document_photo.url))
 
     def __str__(self):
         return "%s - %s" % (self.user, self.user_document_number)
