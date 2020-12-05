@@ -9,20 +9,21 @@ CATEGORY = (
 
 
 class Book(models.Model):
-    book_title = models.CharField(
+    title = models.CharField(
         max_length=255, validators=[BookNameValidator],)
-    book_author = models.CharField(
+    author = models.CharField(
         max_length=255, validators=[BookAuthorValidator],)
-    book_description = models.CharField(max_length=255, validators=[
+    image = models.ImageField(
+        upload_to='upload_photos/book_photos/', null=True, blank=True)
+    description = models.CharField(max_length=255, validators=[
                                         BookNameValidator], null=True, blank=True)
-    book_category = models.PositiveSmallIntegerField(
+    category = models.PositiveSmallIntegerField(
         choices=CATEGORY, default=None, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
-    
 
     def __str__(self):
-        return '%s - %s' % (self.book_title, self.book_author)
+        return '%s - %s' % (self.title, self.author)
 
     class Meta:
         verbose_name = 'Book product'
