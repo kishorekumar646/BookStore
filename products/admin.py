@@ -7,7 +7,7 @@ from .models import Book
 class BookAdmin(admin.ModelAdmin):
     fieldsets = (
         (_('Book info'), {'fields': (('title', 'author'), 'description', 'category',
-                                    'image_cover')}),
+                                    'image_cover','price')}),
         (_('Important dates'), {'fields': ('created_at', 'modified_at')}),
     )
     list_display = ('title','author','created_at')

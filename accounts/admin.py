@@ -35,7 +35,7 @@ class UserAdmin(DjangoUserAdmin):
 @admin.register(UserDocument)
 class UserDocumentAdmin(admin.ModelAdmin):
     model = UserDocument
-    fields = ('user_document_type', 'user_document_number',
+    fields = ('user','user_document_type', 'user_document_number',
               'user_document_photo', 'user_document_photo_thumbnail', )
     readonly_fields = ('user_document_photo_thumbnail',)
 
