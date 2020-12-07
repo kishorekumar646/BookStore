@@ -19,10 +19,14 @@ class Cart(models.Model):
     def __str__(self):
         return self.product.title
 
+    class Meta:
+        ordering = ['-id']
+        verbose_name = "Cart"
+
 
 class CartProductMapping(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    items = models.ManyToManyField(Cart)
+    items = models.ManyToManyField('Cart',related_name='cart_order')
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 

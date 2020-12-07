@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Cart, CartProductMapping
 from django.utils.translation import ugettext_lazy as _
+from .forms import OrderUserForm
 
 
 @admin.register(Cart)
@@ -16,6 +17,7 @@ class CartAdmin(admin.ModelAdmin):
 
 @admin.register(CartProductMapping)
 class CartProductMappingAdmin(admin.ModelAdmin):
+    form = OrderUserForm
     fieldsets = (
         (_('Order info'), {'fields': ('user', 'items')}),
         (_('Important dates'), {'fields': ('created_at', 'modified_at')}),

@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     # packages #
 
     'rest_framework',
+    'dal',
+    'dal_select2',
+    'dal_admin_filters',
 
     # apps #
 
@@ -139,13 +142,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
