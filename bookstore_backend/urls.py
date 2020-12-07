@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf.urls import url, include
 from django.conf.urls.static import serve
 from django.urls import path, re_path
 from django.conf import settings
@@ -24,6 +25,7 @@ admin.site.index_title = 'Dashboard'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r'^products/',include('products.urls')),
 ]
 
 if settings.DEBUG:

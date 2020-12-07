@@ -19,7 +19,7 @@ class Book(models.Model):
     author = models.CharField(
         max_length=255, validators=[BookAuthorValidator],)
     image_cover = models.ImageField(
-        upload_to='upload_photos/book_photos/', null=True, blank=True)
+        upload_to='upload_photos/book_photos/', null=True, blank=True,default=None)
     description = models.CharField(max_length=255, validators=[
         BookNameValidator], null=True, blank=True)
     category = models.PositiveSmallIntegerField(
