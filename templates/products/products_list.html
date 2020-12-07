@@ -1,17 +1,19 @@
 {% include "base.html" %}
 
 {% block content %}
-    {% for product in product_list %}
-        <div>
-            {% if product.image_cover %}
-                <img src="{{ product.image_cover.url }}" width="70" height="120" />
-            {% endif %}
-            <p>{{ product.title }}</p>
-            <p>Rs.{{ product.price }}</p>
+    <div class="product-list">
+        {% for product in product_list %}
+            <div class="product-item">
+                {% if product.image_cover %}
+                    <img src="{{ product.image_cover.url }}" width="70" height="120" />
+                {% endif %}
+                <p>{{ product.title }}</p>
+                <p>Rs. {{ product.price }}</p>
 
-            <a href="" >
-                <button>Add to Bag</button>
-            </a>
-        </div>
-    {% endfor %}
+                <a href="" >
+                    <button>Add to Bag</button>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock content %}
