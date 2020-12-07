@@ -1,0 +1,17 @@
+{% include "base.html" %}
+
+{% block content %}
+    {% for product in product_list %}
+        <div>
+            {% if product.image_cover %}
+                <img src="{{ product.image_cover.url }}" width="70" height="120" />
+            {% endif %}
+            <p>{{ product.title }}</p>
+            <p>Rs.{{ product.price }}</p>
+
+            <a href="" >
+                <button>Add to Bag</button>
+            </a>
+        </div>
+    {% endfor %}
+{% endblock content %}
