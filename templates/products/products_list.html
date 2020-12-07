@@ -8,10 +8,10 @@
                     <img src="{{ product.image_cover.url }}" width="70" height="120" />
                 {% endif %}
                 <p>{{ product.title }}</p>
+                <p>{{ product.id }}</p>
                 <p>Rs. {{ product.price }}</p>
-
-                <a href="" >
-                    <button>Add to Bag</button>
+                <a href="{% url 'add_to_cart' product.id %}">
+                <button data-product={{product.id}} data-action="add" class="add-btn update-cart">Add to Bag</button>
                 </a>
             </div>
         {% endfor %}
