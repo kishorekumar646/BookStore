@@ -59,21 +59,6 @@ class Pincode(models.Model):
         return self.pincode
 
 
-class Area(models.Model):
-    city = models.ForeignKey(City, related_name='city_area',
-                             null=True, blank=True, on_delete=models.CASCADE)
-    area_name = models.CharField(max_length=255, validators=[NameValidator])
-    created_at = models.DateTimeField(auto_now_add=True)
-    modified_at = models.DateTimeField(auto_now=True)
-    status = models.BooleanField(default=True)
-
-    class Meta:
-        ordering = ['-id']
-
-    def __str__(self):
-        return self.area_name
-
-
 class Address(models.Model):
     nick_name = models.CharField(max_length=255, null=True, blank=True)
     address_line1 = models.CharField(
@@ -92,6 +77,7 @@ class Address(models.Model):
                               on_delete=models.CASCADE, blank=True, null=True)
     city = models.ForeignKey(
         City, related_name='city_address', on_delete=models.CASCADE)
+    area = models.CharField(max_length=255, null=True, blank=True)
     address_type = models.CharField(
         max_length=255, choices=ADRESS_TYPE_CHOICE, default='home')
     latitude = models.FloatField(default=0, null=True, blank=True)
