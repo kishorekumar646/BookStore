@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from products.models import Book
+from addresses.models import Address
 
 ORDER_STATUS = (
     ("ordered_to_brand", "Ordered To Brand"),
