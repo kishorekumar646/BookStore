@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import (Address, State, City, Pincode, Area)
 from import_export.admin import ImportExportModelAdmin
-from .forms import StateForm
+from .forms import AddressForm
 
 
 class PincodeAdmin(ImportExportModelAdmin):

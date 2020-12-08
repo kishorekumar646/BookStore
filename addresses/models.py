@@ -3,6 +3,12 @@ from bookstore_backend.validators import (
     AddressNameValidator, MobileNumberValidator, PinCodeValidator, NameValidator)
 from django.utils.translation import ugettext_lazy as _
 
+ADRESS_TYPE_CHOICE = (
+    ("home", "Home"),
+    ("office", "Office"),
+    ("other", "Other"),
+)
+
 
 class State(models.Model):
     state_name = models.CharField(max_length=255, validators=[NameValidator])
@@ -52,6 +58,7 @@ class Pincode(models.Model):
     def __str__(self):
         return self.pincode
 
+
 class Area(models.Model):
     city = models.ForeignKey(City, related_name='city_area',
                              null=True, blank=True, on_delete=models.CASCADE)
@@ -77,6 +84,18 @@ class Address(models.Model):
         validators=[MobileNumberValidator], max_length=10, blank=True)
     pincode = models.CharField(
         validators=[PinCodeValidator], max_length=6, blank=True)
+    pincode_link = models.ForeignKey(Pincode, related_name='pincode_address',
+                                     null=True, blank=True,
+                                     on_delete=models.DO_NOTHING)
+
+    state = models.ForeignKey(State, related_name='state_address',
+                              on_delete=models.CASCADE, blank=True, null=True)
+    city = models.ForeignKey(
+        City, related_name='city_address', on_delete=models.CASCADE)
+    address_type = models.CharField(
+        max_length=255, choices=ADRESS_TYPE_CHOICE, default='home')
+    latitude = models.FloatField(default=0, null=True, blank=True)
+    longitude = models.FloatField(default=0, null=True, blank=True)
     modified_at = models.DateTimeField(auto_now=True)
     status = models.BooleanField(default=True)
 
