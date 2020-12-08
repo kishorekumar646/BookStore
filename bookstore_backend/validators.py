@@ -32,3 +32,9 @@ PinCodeValidator = RegexValidator(
     message=VALIDATION_ERROR_MESSAGES['INVALID_PINCODE'],
     code='INVALID_PINCODE'
 )
+
+NameValidator = RegexValidator(
+    regex='^[a-zA-Z\s]{2,255}$',
+    message=VALIDATION_ERROR_MESSAGES['INVALID_NAME'],
+    code='INVALID_NAME'
+)

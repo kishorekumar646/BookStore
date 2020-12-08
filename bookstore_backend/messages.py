@@ -4,4 +4,5 @@ VALIDATION_ERROR_MESSAGES = {
     'INVALID_ADDRESS': 'Invalid address. Special characters allowed are # - , / . ( ) &',
     'INVALID_MOBILE_NUMBER': 'Mobile Number is not valid',
     'INVALID_PINCODE': 'Invalid Pincode',
+    'INVALID_NAME': 'Invalid name. Only alphabets are allowed',
 }

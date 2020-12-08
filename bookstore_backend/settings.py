@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'dal',
     'dal_select2',
     'dal_admin_filters',
+    'import_export',
 
     # apps #
 
