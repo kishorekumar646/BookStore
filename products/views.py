@@ -5,14 +5,14 @@ from .models import Book
 from .serializers import BookProductListSerializer
 
 
-def BookProductList(request):
+def BookProduct(request):
     product_list = Book.objects.all()
 
     context = {
         'product_list': product_list,
     }
 
-    return render(request,'products/products_list.html', context)
+    return render(request,'product.html', context)
 
 
 def home(request):
@@ -22,4 +22,4 @@ def home(request):
         'items': product_list,
     }
 
-    return render(request,'home-page.html', context)
+    return render(request,'home.html', context)

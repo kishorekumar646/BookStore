@@ -30,7 +30,8 @@ class Book(models.Model):
         BookNameValidator], null=True, blank=True)
     category = models.PositiveSmallIntegerField(
         choices=CATEGORY, default=None, null=True, blank=True)
-    label = models.CharField(max_length=1, choices=LABEL_CHOICE,null=True,blank=True)
+    label = models.CharField(max_length=1, default='P',
+                             choices=LABEL_CHOICE, null=True, blank=True)
     price = models.DecimalField(
         max_digits=10, decimal_places=2, null=True, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
