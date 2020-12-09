@@ -10,36 +10,36 @@ ORDER_STATUS = (
 )
 
 
-class Cart(models.Model):
+class OrderItem(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    product = models.OneToOneField(
-        Book, on_delete=models.SET_NULL, null=True, blank=True)
-    qty = models.IntegerField(default=1)
+    item = models.ForeignKey(Book,on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    ordered = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.product.title
+        return self.item.title
 
     @property
     def price(self):
-        return (self.product.price)
+        return (self.item.price)
 
     @property
     def total_amount(self):
-        return (self.qty * self.product.price)
+        return (self.quantity * self.item.price)
 
     class Meta:
         ordering = ['-id']
         verbose_name = "Cart"
 
 
-class CartProductMapping(models.Model):
+class Order(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    items = models.ManyToManyField('Cart', related_name='cart_order')
+    items = models.ManyToManyField('OrderItem', related_name='cart_order')
 
     start_date = models.DateTimeField(auto_now_add=True)
-    ordered_date = models.DateTimeField(auto_now=True)
+    ordered_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)
 
     def __str__(self):

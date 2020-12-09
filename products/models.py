@@ -49,6 +49,9 @@ class Book(models.Model):
     def get_absolute_url(self):
         return reverse("product", kwargs={'slug': self.slug})
 
+    def get_add_to_cart_url(self):
+        return reverse("add_to_cart", kwargs={'slug': self.slug})
+
     class Meta:
         ordering = ['price']
         verbose_name = 'Book product'

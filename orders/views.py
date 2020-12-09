@@ -1,10 +1,11 @@
 from django.shortcuts import render, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
-from django.shortcuts import get_list_or_404
+from django.shortcuts import get_object_or_404, redirect
 from products.models import Book
 from dal import autocomplete
-from .models import Cart, CartProductMapping
+from django.utils import timezone
+from .models import Order, OrderItem
 
 User = get_user_model()
 
@@ -29,8 +30,32 @@ class ItemUserAutocomplete(autocomplete.Select2QuerySetView):
         return qs
 
 
-@login_required()
-def add_to_cart(request, **kwargs):
-    product = Book.objects.filter(id=kwargs.get('item_id', "")).first()
-    print(product)
-    return HttpResponse("Successfull added to cart")
+# @login_required()
+def add_to_cart(request, slug):
+    print(slug)
+    item = get_object_or_404(Book, slug=slug)
+    order_item, created = OrderItem.objects.get_or_create(
+        item=item,
+        user=request.user,
+        ordered=False
+    )
+    order_qs = Order.objects.filter(
+        user=request.user, ordered=False)
+
+    if order_qs.exists():
+        order = order_qs[0]
+
+        if order.items.filter(item__slug=item.slug).exists():
+            order_item.quantity += 1
+            order_item.save()
+
+        else:
+            order.itmes.add(order_item)
+
+    else:
+        ordered_date = timezone.now()
+        order = Order.objects.create(
+            user=request.user, ordered_date=ordered_date)
+        order.items.add(order_item)
+
+    return redirect("product", slug=slug)

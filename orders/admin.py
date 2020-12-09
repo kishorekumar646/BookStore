@@ -1,22 +1,22 @@
 from django.contrib import admin
-from .models import Cart, CartProductMapping
+from .models import Order,OrderItem
 from django.utils.translation import ugettext_lazy as _
 from .forms import OrderUserForm
 
 
-@admin.register(Cart)
+@admin.register(OrderItem)
 class CartAdmin(admin.ModelAdmin):
     fieldsets = (
-        (_('Cart info'), {'fields': ('user', 'product', 'qty')}),
+        (_('Cart info'), {'fields': ('user', 'item', 'quantity')}),
         (_('Important dates'), {'fields': ('created_at', 'modified_at')}),
     )
-    list_display = ('product', 'user', 'qty', 'price', 'total_amount',)
-    list_filter = ('product__price', 'user')
-    search_fields = ('product', 'user')
+    list_display = ('item', 'user', 'quantity', 'price', 'total_amount',)
+    list_filter = ('item__price', 'user')
+    search_fields = ('item', 'user')
     readonly_fields = ('created_at', 'modified_at',)
 
 
-@admin.register(CartProductMapping)
+@admin.register(Order)
 class CartProductMappingAdmin(admin.ModelAdmin):
     form = OrderUserForm
     fieldsets = (
