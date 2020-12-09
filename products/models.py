@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.safestring import mark_safe
 from bookstore_backend.validators import *
+from django.urls import reverse
+from django.db.models.signals import pre_save
 
 CATEGORY = (
     (1, "Programming"),
@@ -22,6 +24,7 @@ LABEL_CHOICE = (
 class Book(models.Model):
     title = models.CharField(
         max_length=255, validators=[BookNameValidator],)
+    slug = models.SlugField(unique=True)
     author = models.CharField(
         max_length=255, validators=[BookAuthorValidator],)
     image_cover = models.ImageField(
@@ -43,6 +46,32 @@ class Book(models.Model):
     def book_photo_thumbnail(self):
         return mark_safe('<img alt="%s" src="%s" width="70" height="120" />' % (self.title, self.image_cover.url))
 
+    def get_absolute_url(self):
+        return reverse("product", kwargs={'slug': self.slug})
+
     class Meta:
         ordering = ['price']
         verbose_name = 'Book product'
+        unique_together = (('title', 'slug'),)
+
+
+def create_slug(instance, new_slug=None):
+    slug = slugify(instance.title)
+
+    if new_slug is not None:
+        slug = new_slug
+
+    qs = Book.objects.filter(slug=slug).order_by("-id")
+    exists = qs.exists()
+
+    if exists:
+        new_slug = "%s-%s" % (slug, qs.first().title)
+        return create_slug(instance, new_slug=new_slug)
+    return slug
+
+
+def pre_save_post_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = create_slug(instance)
+
+pre_save.connect(pre_save_post_receiver, sender=Book)
