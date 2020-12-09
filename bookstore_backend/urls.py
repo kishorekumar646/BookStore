@@ -25,7 +25,7 @@ admin.site.index_title = 'Dashboard'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^products/',include('products.urls')),
+    url(r'',include('products.urls')),
     url(r'^orders/',include('orders.urls')),
     url(r'^addresses/',include('addresses.urls')),
 ]

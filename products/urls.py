@@ -1,7 +1,8 @@
 from django.conf.urls import url, include
-from .views import BookProduct, HomeView
+from django.urls import path
+from .views import HomeView,BookDetailView
 
 urlpatterns = [
     url('home/', HomeView.as_view(), name='home'),
-    url(r'^product/(?P<slug>[\w-]+)/$', BookProduct, name='product')
+    path('product/<slug>/', BookDetailView.as_view(), name='product')
 ]
