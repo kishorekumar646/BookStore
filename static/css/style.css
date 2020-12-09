@@ -38,6 +38,10 @@ body,
     background-color: #929FBA;
 }
 
-.navbar .container {
+.navbar {
     background-color: rgb(126, 0, 0);
+}
+
+.card {
+    height: 100vh;
 }
