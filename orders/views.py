@@ -20,7 +20,7 @@ class OrderUserAutocomplete(autocomplete.Select2QuerySetView):
 
 class ItemUserAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self, *args, **kwargs):
-        qs = Cart.objects.all()
+        qs = OrderItem.objects.all()
         user_id = self.forwarded.get('user', None)
         if user_id:
             user = User.objects.get(id=user_id)
