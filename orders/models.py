@@ -37,8 +37,13 @@ class Cart(models.Model):
 class CartProductMapping(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     items = models.ManyToManyField('Cart', related_name='cart_order')
-    created_at = models.DateTimeField(auto_now_add=True)
-    modified_at = models.DateTimeField(auto_now=True)
+
+    start_date = models.DateTimeField(auto_now_add=True)
+    ordered_date = models.DateTimeField(auto_now=True)
+    ordered = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.first_name
 
     class Meta:
         verbose_name = "Place Order"

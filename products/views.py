@@ -13,3 +13,13 @@ def BookProductList(request):
     }
 
     return render(request,'products/products_list.html', context)
+
+
+def home(request):
+    product_list = Book.objects.all()
+
+    context = {
+        'items': product_list,
+    }
+
+    return render(request,'home-page.html', context)

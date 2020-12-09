@@ -21,9 +21,9 @@ class CartProductMappingAdmin(admin.ModelAdmin):
     form = OrderUserForm
     fieldsets = (
         (_('Order info'), {'fields': ('user', 'items')}),
-        (_('Important dates'), {'fields': ('created_at', 'modified_at')}),
+        (_('Important dates'), {'fields': ('start_date', 'ordered_date')}),
     )
     list_display = ('user',)
-    list_filter = ('created_at', 'modified_at',)
+    list_filter = ('start_date', 'ordered_date',)
     search_fields = ('user',)
-    readonly_fields = ('created_at', 'modified_at',)
+    readonly_fields = ('start_date', 'ordered_date',)
