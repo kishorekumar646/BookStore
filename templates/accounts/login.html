@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main_content %}
+
+<div class="container-fluid px-1 overflow-hidden">
+    <div class="card card0 border-0">
+        <div class="row d-flex">
+            <div class="col-lg-6">
+                <div class="card1 pb-5">
+                    <div class="row px-3 justify-content-center mt-5 mb-1 border-line"> 
+                        <img src="{% static 'img/svg/undraw_book.svg' %}" class="image"> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="card2 card border-0 px-4 py-5">
+                    <div class="row px-3"> <label class="mb-1">
+                            <h6 class="mb-0 text-sm">Phone number</h6>
+                        </label> <input class="mb-4" type="text" name="email" placeholder="Enter a valid email address"> </div>
+                    <div class="row px-3"> <label class="mb-1">
+                            <h6 class="mb-0 text-sm">Password</h6>
+                        </label> <input type="password" name="password" placeholder="Enter password"> </div>
+                    <div class="row px-3 mb-4">
+                        <div class="custom-control custom-checkbox custom-control-inline"> 
+                        </div> <a href="#" class="ml-auto mb-0 text-sm">Forgot Password?</a>
+                    </div>
+                    <div class="row mb-1 px-2"> <button type="submit" class="btn btn-blue text-center">Login</button> </div>
+                    <div class="row mb-2 px-3"> <small class="font-weight-bold">Don't have an account? <a href="{% url 'register' %}" class="text-danger ">Register</a></small> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main_content %}
