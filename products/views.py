@@ -4,8 +4,6 @@ from django.views.generic import ListView,DetailView
 # from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from .models import Book
-from .serializers import BookProductListSerializer
-
 
 class HomeView(ListView):
     model = Book
