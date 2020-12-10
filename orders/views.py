@@ -49,10 +49,12 @@ def add_to_cart(request, slug):
             order_item.quantity += 1
             order_item.save()
             messages.info(request,"This item quantity was updated")
+            return redirect("product", slug=slug)
 
         else:
             messages.info(request,"This item was added to your cart")
             order.items.add(order_item)
+            return redirect("product", slug=slug)
 
     else:
         ordered_date = timezone.now()
