@@ -27,6 +27,7 @@
 
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
+        {% if request.user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link waves-effect white-text">
               <span class="badge red z-depth-1 mr-1"> 1 </span>
@@ -34,8 +35,19 @@
               <span class="clearfix d-none d-sm-inline-block"> Cart </span>
             </a>
           </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link waves-effect white-text" href="{% url 'login' %}">
+              <span class="clearfix d-none d-sm-inline-block">Login</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect white-text" href="{% url 'register' %}">
+              <span class="clearfix d-none d-sm-inline-block">Register</span>
+            </a>
+          </li>
         </ul>
-
+        {% endif %}
       </div>
 
     </div>
