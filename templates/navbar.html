@@ -1,0 +1,43 @@
+{% load static %}
+<!-- Navbar -->
+
+  <nav class="navbar fixed-top navbar-expand-lg scrolling-navbar">
+    <div class="container">
+
+      <!-- Brand -->
+      <img src="{% static 'img/book.jpg' %}" width="45px"/>&nbsp&nbsp&nbsp
+      <a class="navbar-brand waves-effect" href="{% url 'home' %}">
+        <strong class="white-text">Book Store</strong>
+      </a>
+
+      <!-- Collapse -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <!-- Left -->
+        <form class="form-inline my-2 my-lg-0 ml-auto">
+          <input class="search form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn my-1 my-sm-0 white-text" type="submit">Search</button>
+        </form>
+
+        <!-- Right -->
+        <ul class="navbar-nav nav-flex-icons">
+          <li class="nav-item">
+            <a class="nav-link waves-effect white-text">
+              <span class="badge red z-depth-1 mr-1"> 1 </span>
+              <i class="fas fa-shopping-cart"></i>
+              <span class="clearfix d-none d-sm-inline-block"> Cart </span>
+            </a>
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+  </nav>
+  <!-- Navbar -->
