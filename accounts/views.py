@@ -8,3 +8,7 @@ def login(request):
 def register(request):
 
     return render(request,"accounts/register.html")
+
+def logout(request):
+
+    return render(request,"accounts/login.html")

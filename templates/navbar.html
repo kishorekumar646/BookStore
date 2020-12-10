@@ -35,6 +35,11 @@
               <span class="clearfix d-none d-sm-inline-block"> Cart </span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect white-text" href="{% url 'logout' %}">
+              <span class="clearfix d-none d-sm-inline-block">Logout</span>
+            </a>
+          </li>
         {% else %}
           <li class="nav-item">
             <a class="nav-link waves-effect white-text" href="{% url 'login' %}">
