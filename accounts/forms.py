@@ -9,3 +9,6 @@ class LoginForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['phone_number','password']
+        widgets = {
+            'password': forms.PasswordInput(),
+        }
