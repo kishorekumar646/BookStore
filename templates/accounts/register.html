@@ -14,39 +14,43 @@
                 </div>
             </div>
             <div class="col-lg-5">
-                <div class="card2 card border-0 px-4 py-5">
-                    <div class="row px-3"> <label class="mb-1">
-                            <h6 class="mb-0 text-sm">Phone number</h6>
-                        </label> 
-                        <input class="mb-4" type="text" name="phone" placeholder="Enter a valid phone number" maxlength="10"> 
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="mb-1">
-                                    <h6 class="mb-0 text-sm">Password</h6>
-                                </label> 
-                                <input type="password" name="password" placeholder="Enter password"> 
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="card2 card border-0 px-4 py-5">
+                        <div class="row px-3"> 
+                            <label class="mb-1">
+                                <h6 class="mb-0 text-sm">Phone number</h6>
+                            </label>
+                            {{ form.phone_number }} 
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="mb-1">
+                                        <h6 class="mb-0 text-sm">Password</h6>
+                                    </label>
+                                    {{ form.password }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="mb-1">
+                                        <h6 class="mb-0 text-sm">Confirm Password</h6>
+                                    </label> 
+                                    {{ form.confirm_password }}
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="mb-1">
-                                    <h6 class="mb-0 text-sm">Confirm Password</h6>
-                                </label> 
-                                <input type="password" name="password" placeholder="Enter confirm password"> 
-                            </div>
+                        <div class="row px-3"> <label class="mb-1">
+                                <h6 class="mb-0 text-sm">Email Address</h6>
+                            </label> 
+                            <input class="mb-4" type="text" name="email" placeholder="Enter a valid email address"> 
                         </div>
+                        
+                        <div class="row mb-1 px-2"> <button type="submit" class="btn btn-blue text-center">Register</button> </div>
+                        <div class="row mb-2 px-3"> <small class="font-weight-bold">I have an account? <a href="{% url 'login' %}" class="text-danger ">Login</a></small> </div>
                     </div>
-                    <div class="row px-3"> <label class="mb-1">
-                            <h6 class="mb-0 text-sm">Email Address</h6>
-                        </label> 
-                        <input class="mb-4" type="text" name="email" placeholder="Enter a valid email address"> 
-                    </div>
-                    
-                    <div class="row mb-1 px-2"> <button type="submit" class="btn btn-blue text-center">Register</button> </div>
-                    <div class="row mb-2 px-3"> <small class="font-weight-bold">I have an account? <a href="{% url 'login' %}" class="text-danger ">Login</a></small> </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
