@@ -16,7 +16,6 @@ class Login(View):
         print(form.errors)
         if form.is_valid():
             print(request.POST)
-
             return redirect('home')
         else:
             return render(request, "accounts/login.html", {'form': form})
