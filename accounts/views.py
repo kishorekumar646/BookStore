@@ -1,14 +1,27 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.views import View
 
 
-def login(request):
+class Login(View):
 
-    return render(request, "accounts/login.html")
+    def get(self, request):
 
-def register(request):
+        return render(request, "accounts/login.html")
 
-    return render(request,"accounts/register.html")
+    def post(self, request):
+        print(request.POST)
+        return redirect('home')
 
-def logout(request):
 
-    return render(request,"accounts/login.html")
+class Register(View):
+
+    def get(self, request):
+
+        return render(request, "accounts/register.html")
+
+
+class Logout(View):
+
+    def get(self, request):
+
+        return render(request, "accounts/login.html")

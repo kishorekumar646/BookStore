@@ -45,3 +45,7 @@ body,
 .card {
     height: 100vh;
 }
+
+.foot-color {
+    background-color: #8C0007;
+}
