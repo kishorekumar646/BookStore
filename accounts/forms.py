@@ -10,5 +10,6 @@ class LoginForm(forms.ModelForm):
         model = User
         fields = ['phone_number','password']
         widgets = {
-            'password': forms.PasswordInput(),
+            'password': forms.PasswordInput(attrs={'placeholder': 'Enter a password','class':'mb-4'}),
+            'phone_number': forms.TextInput(attrs={'placeholder': 'Enter a valid phone number','class':'mb-4'}),
         }

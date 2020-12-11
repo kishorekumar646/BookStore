@@ -13,15 +13,16 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5">
+            <div class="col-lg-4">
                 <form action="" method="POST">
                     {% csrf_token %}
-                    <div class="card2 card border-0 px-4 py-5">
+                    <div class="px-4 py-5">
                         <div class="row px-3"> 
                             <label class="mb-1">
                                 <h6 class="mb-0 text-sm">Phone number</h6>
                             </label>
-                            {{ form.phone_number }} 
+                            {{ form.phone_number }}
+                            {{ form.phone_number.error }}
                         <div class="row px-3"> 
                             <label class="mb-1">
                                 <h6 class="mb-0 text-sm">Password</h6>
@@ -31,10 +32,10 @@
                              
                             </div> <a href="{% url 'home'%}" class="ml-auto mb-0 text-sm">Forgot Password?</a>
                         </div>
-                        <div class="mb-1 px-2"> 
+                        <div class="row mb-5 px-2"> 
                             <button type="submit" class="btn btn-blue text-center">Login</button>
                         </div>
-                        <div class="mb-2 px-3"> 
+                        <div class="row ml-5"> 
                             <small class="font-weight-bold">Don't have an account? 
                                 <a href="{% url 'register' %}" class="text-danger ">Register</a>
                             </small> 
