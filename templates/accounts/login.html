@@ -42,8 +42,12 @@
                         </div>
                     </div>
                 </form>
-                <div class="alert-dismissible alert-danger" role="alert">
-                    {{ form.phone_number.errors }}
+                <div class="alert-dismissible alert-danger text-center" role="alert">
+                    {% if form.phone_number.errors %}
+                        {{ form.phone_number.errors|striptags }}
+                    {% else %}
+                        {{ form.non_field_errors|striptags }}
+                    {% endif %}
                 </div>
             </div>
         </div>

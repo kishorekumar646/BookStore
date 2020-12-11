@@ -21,9 +21,12 @@ class LoginForm(forms.Form):
         print(phone_number)
         print(password)
         user = authenticate(phone_number=phone_number, password=password)
-        print(user)
+        
+        if not user:
+            print(user)
+            raise forms.ValidationError("User not registered")
 
-        return self.cleaned_data
+        return user
 
 
 class RegisterForm(forms.ModelForm):
