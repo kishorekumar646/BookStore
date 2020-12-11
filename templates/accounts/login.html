@@ -17,20 +17,24 @@
                 <form action="" method="POST">
                     {% csrf_token %}
                     <div class="card2 card border-0 px-4 py-5">
-                        <div class="row px-3"> <label class="mb-1">
+                        <div class="row px-3"> 
+                            <label class="mb-1">
                                 <h6 class="mb-0 text-sm">Phone number</h6>
-                            </label> <input class="mb-4" type="text" name="phone" placeholder="Enter a phone number" maxlength="10"> </div>
-                        <div class="row px-3"> <label class="mb-1">
+                            </label>
+                            {{ form.phone_number }} 
+                        <div class="row px-3"> 
+                            <label class="mb-1">
                                 <h6 class="mb-0 text-sm">Password</h6>
-                            </label> <input type="password" name="password" placeholder="Enter password"> </div>
+                            </label> 
+                            {{ form.password }}
                         <div class="row px-3 mb-4">
-                            <div class="custom-control custom-checkbox custom-control-inline"> 
+                             
                             </div> <a href="{% url 'home'%}" class="ml-auto mb-0 text-sm">Forgot Password?</a>
                         </div>
-                        <div class="row mb-1 px-2"> 
+                        <div class="mb-1 px-2"> 
                             <button type="submit" class="btn btn-blue text-center">Login</button>
                         </div>
-                        <div class="row mb-2 px-3"> 
+                        <div class="mb-2 px-3"> 
                             <small class="font-weight-bold">Don't have an account? 
                                 <a href="{% url 'register' %}" class="text-danger ">Register</a>
                             </small> 
