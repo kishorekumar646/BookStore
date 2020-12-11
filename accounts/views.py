@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.contrib.auth.forms import AuthenticationForm
 from django.views import View
 from .forms import LoginForm
 
@@ -10,8 +11,14 @@ class Login(View):
         return render(request, "accounts/login.html",{'form': form})
 
     def post(self, request):
-        print(request.POST)
-        return redirect('home')
+        
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            print(request.POST)
+
+            return redirect('home')
+        else:
+            return render(request, "accounts/login.html",{'form': form})
 
 
 class Register(View):
