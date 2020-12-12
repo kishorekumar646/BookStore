@@ -7,6 +7,7 @@ from .models import Book
 
 class HomeView(ListView):
     model = Book
+    paginate_by = 8
     template_name = "home.html"
 
 class BookDetailView(DetailView):
