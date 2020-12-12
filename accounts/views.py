@@ -45,13 +45,13 @@ class Register(View):
 
         form = RegisterForm(request.POST)
         print(form.errors)
-        print(form.is_valid())
         if form.is_valid():
             print(request.POST)
-
+            user = form.save()
+            user.save()
             return redirect('login')
         else:
-            return redirect('register')
+            return render(request,'accounts/register.html',{'form': form})
 
 
 class Logout(View):

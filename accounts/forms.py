@@ -2,6 +2,7 @@ from django import forms
 from django.core.validators import RegexValidator
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model, authenticate
+from django.contrib.auth.forms import UserCreationForm
 
 User = get_user_model()
 
@@ -34,15 +35,28 @@ class LoginForm(forms.Form):
         return user
 
 
-class RegisterForm(forms.ModelForm):
-
-    confirm_password = forms.CharField(widget=forms.PasswordInput(
-        attrs={'placeholder': 'Enter a confirm password'}))
+class RegisterForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['phone_number', 'password', 'email']
+        fields = ['phone_number', 'password1', 'password2', 'email']
         widgets = {
-            'password': forms.PasswordInput(attrs={'placeholder': 'Enter a password', 'class': 'mb-4'}),
+            'password1': forms.PasswordInput(attrs={'placeholder': 'Enter a password', 'class': 'mb-4'}),
+            'password2': forms.PasswordInput(attrs={'placeholder': 'Enter a confirm password', 'class': 'mb-4'}),
             'phone_number': forms.TextInput(attrs={'placeholder': 'Enter a valid phone number', 'class': 'mb-4'}),
+            'email': forms.TextInput(attrs={'placeholder': 'Enter a valid phone number', 'class': 'mb-4'})
         }
+
+    def clean(self, *args, **kwargs):
+
+        return super(RegisterForm, self).clean(*args, **kwargs)
+
+    def save(self, commit=True):
+        user = super(RegisterForm, self).save(commit=False)
+        user.phone_number = self.cleaned_data.get('phone_number')
+        user.email = self.cleaned_data.get('email')
+
+        if commit:
+            user.save()
+
+        return user

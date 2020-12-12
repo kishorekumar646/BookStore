@@ -29,7 +29,7 @@
                                     <label class="mb-1">
                                         <h6 class="mb-0 text-sm">Password</h6>
                                     </label>
-                                    {{ form.password }}
+                                    {{ form.password1 }}
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -37,20 +37,27 @@
                                     <label class="mb-1">
                                         <h6 class="mb-0 text-sm">Confirm Password</h6>
                                     </label> 
-                                    {{ form.confirm_password }}
+                                    {{ form.password2 }}
                                 </div>
                             </div>
                         </div>
                         <div class="row px-3"> <label class="mb-1">
                                 <h6 class="mb-0 text-sm">Email Address</h6>
                             </label> 
-                            <input class="mb-4" type="text" name="email" placeholder="Enter a valid email address"> 
+                            {{ form.email }} 
                         </div>
                         
                         <div class="row mb-1 px-2"> <button type="submit" class="btn btn-blue text-center">Register</button> </div>
                         <div class="row mb-2 px-3"> <small class="font-weight-bold">I have an account? <a href="{% url 'login' %}" class="text-danger ">Login</a></small> </div>
                     </div>
                 </form>
+                <div class="alert-dismissible alert-danger text-center" role="alert">
+                    {% if form.phone_number.errors %}
+                        {{ form.phone_number.errors|striptags }}
+                    {% else %}
+                        {{ form.non_field_errors|striptags }}
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
