@@ -2,6 +2,8 @@ from django.shortcuts import render, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404, redirect
+from django.views.generic import ListView, DetailView, View
+from django.core.exceptions import ObjectDoesNotExist
 from products.models import Book
 from dal import autocomplete
 from django.utils import timezone
@@ -48,11 +50,11 @@ def add_to_cart(request, slug):
         if order.items.filter(item__slug=item.slug).exists():
             order_item.quantity += 1
             order_item.save()
-            messages.info(request,"This item quantity was updated")
+            messages.info(request, "This item quantity was updated")
             return redirect("product", slug=slug)
 
         else:
-            messages.info(request,"This item was added to your cart")
+            messages.info(request, "This item was added to your cart")
             order.items.add(order_item)
             return redirect("product", slug=slug)
 
@@ -61,7 +63,7 @@ def add_to_cart(request, slug):
         order = Order.objects.create(
             user=request.user, ordered_date=ordered_date)
         order.items.add(order_item)
-        messages.info(request,"This item was added to your cart")
+        messages.info(request, "This item was added to your cart")
     return redirect("product", slug=slug)
 
 
@@ -83,15 +85,30 @@ def remove_from_cart(request, slug):
                 ordered=False
             )[0]
             order.items.remove(order_item)
-            messages.info(request,"This item was removed to your cart")
+            messages.info(request, "This item was removed to your cart")
             return redirect("product", slug=slug)
 
         else:
-            messages.info(request,"This item was not in your cart")
+            messages.info(request, "This item was not in your cart")
             return redirect("product", slug=slug)
 
     else:
-        messages.info(request,"You don't have an active order")
+        messages.info(request, "You don't have an active order")
         return redirect("product", slug=slug)
 
     return redirect("product", slug=slug)
+
+
+class OrderSummaryView(View):
+
+    def get(self,*args,**kwargs):
+        try:
+            order = Order.objects.get(user=self.request.user, ordered=False)
+            context = {
+                'object': order
+            }
+            return render(self.request,'cart.html',context)
+
+        except ObjectDoesNotExist:
+            messages.info(self.request,"You do not have an active order")
+            return redirect(self.request,'oreder_summary')

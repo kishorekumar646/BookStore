@@ -1,38 +1,132 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12 col-sm-8 col-md-6 col-lg-4">
-      <div class="card">
-        <img class="card-img" src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/vans.png" alt="Vans">
-        <div class="card-img-overlay d-flex justify-content-end">
-          <a href="#" class="card-link text-danger like">
-            <i class="fas fa-heart"></i>
-          </a>
-        </div>
+{% extends "base.html" %}
+{% load static %}
+{% load cart_template_tag %}
+
+
+{% block main_content %}
+
+<!--Section: Block Content-->
+<section>
+
+  <!--Grid row-->
+  <div class="row ml-5">
+
+    <!--Grid column-->
+    <div class="col-lg-7">
+
+      <!-- Card -->
+      <div class="card wish-list mb-3">
         <div class="card-body">
-          <h4 class="card-title">Vans Sk8-Hi MTE Shoes</h4>
-          <h6 class="card-subtitle mb-2 text-muted">Style: VA33TXRJ5</h6>
-          <p class="card-text">
-            The Vans All-Weather MTE Collection features footwear and apparel designed to withstand the elements whilst still looking cool.             </p>
-          <div class="options d-flex flex-fill">
-             <select class="custom-select mr-1">
-                <option selected>Color</option>
-                <option value="1">Green</option>
-                <option value="2">Blue</option>
-                <option value="3">Red</option>
-            </select>
-            <select class="custom-select ml-1">
-                <option selected>Size</option>
-                <option value="1">41</option>
-                <option value="2">42</option>
-                <option value="3">43</option>
-            </select>
-          </div>
-          <div class="buy d-flex justify-content-between align-items-center">
-            <div class="price text-success"><h5 class="mt-4">$125</h5></div>
-             <a href="#" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-          </div>
+
+          <h5 class="mb-4">Cart (<span>{{ request.user|cart_item_count }}</span> items)</h5>
+          {% for order_item in object.items.all  %}
+          
+            <div class="row mb-4">
+              <div class="col-md-5 col-lg-3 col-xl-3">
+
+                {% if order_item.item.image_cover %}
+
+                  <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                    <img class="img-fluid w-100"
+                      src="{{ order_item.item.image_cover.url }}" alt="Sample">
+                    <a href="#!">
+
+                      <div class="mask waves-effect waves-light">
+                        <img class="img-fluid w-100"
+                          src="{{ order_item.item.image_cover.url }}">
+                        <div class="mask rgba-black-slight waves-effect waves-light"></div>
+                      </div>
+                    </a>
+                  </div>
+
+                {% endif %}
+
+              </div>
+              <div class="col-md-7 col-lg-9 col-xl-9">
+                <div>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <h5></h5>
+                      <a href="{{ order_item.item.get_absolute_url }}" class="dark-grey-text">{{ order_item.item.title }}</a>
+                      <p class="mb-3 text-muted text-uppercase small"></p>{{ order_item.item.description }}
+                    </div>
+                    <div>
+                      <div class="def-number-input number-input safari_only mb-0 w-100">
+                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                          class="minus"></button>
+                        <input class="quantity" min="0" name="quantity" value="1" type="number">
+                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                          class="plus"></button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <a href="#!" type="button" class="card-link-secondary small text-uppercase mr-3"><i
+                          class="fas fa-trash-alt mr-1"></i> Remove item </a>
+                      <a href="#!" type="button" class="card-link-secondary small text-uppercase"><i
+                          class="fas fa-heart mr-1"></i> Move to wish list </a>
+                    </div>
+                    <p class="mb-0"><span><strong>Rs. {{ order_item.item.price }}</strong></span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr class="mb-4">
+
+          {% endfor %}
+
         </div>
       </div>
+      <!-- Card -->
+
     </div>
+    <!--Grid column-->
+
+    <!--Grid column-->
+    <div class="col-lg-4">
+
+      <!-- Card -->
+      <div class="card mb-3">
+        <div class="card-body">
+
+          <h5 class="mb-3">The total amount of</h5>
+
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+              Temporary amount
+              <span>-</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+              Shipping
+              <span>Gratis</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+              <div>
+                <strong>The total amount of</strong>
+                <strong>
+                  <p class="mb-0">(including VAT)</p>
+                </strong>
+              </div>
+              <span><strong>Rs. 1278 </strong></span>
+            </li>
+          </ul>
+
+          <button type="button" class="btn btn-primary btn-block waves-effect waves-light">go to checkout</button>
+
+        </div>
+      </div>
+      <!-- Card -->
+
+     
+
+    </div>
+    <!--Grid column-->
+
   </div>
-</div>
+  <!--Grid row-->
+
+</section>
+<!--Section: Block Content-->
+
+{% endblock main_content %}

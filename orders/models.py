@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from products.models import Book
 from addresses.models import Address
+import decimal
 
 ORDER_STATUS = (
     ("ordered_to_brand", "Ordered To Brand"),
@@ -44,6 +45,13 @@ class Order(models.Model):
 
     def __str__(self):
         return self.user.first_name
+
+    # def get_total_amount(self):
+    #     total = 0
+    #     for order_item in self.items.all():
+    #         total += order_item.total_amount()
+
+    #     return total
 
     class Meta:
         verbose_name = "Place Order"
