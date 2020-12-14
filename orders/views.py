@@ -85,18 +85,18 @@ def remove_from_cart(request, slug):
                 ordered=False
             )[0]
             order.items.remove(order_item)
-            messages.info(request, "This item was removed to your cart")
-            return redirect("product", slug=slug)
+            messages.info(request, "The item was removed to your cart")
+            return redirect("oreder_summary")
 
         else:
-            messages.info(request, "This item was not in your cart")
-            return redirect("product", slug=slug)
+            messages.info(request, "The item was not in your cart")
+            return redirect("oreder_summary")
 
     else:
         messages.info(request, "You don't have an active order")
-        return redirect("product", slug=slug)
+        return redirect("oreder_summary")
 
-    return redirect("product", slug=slug)
+    return redirect("oreder_summary")
 
 
 class OrderSummaryView(View):
