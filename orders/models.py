@@ -46,12 +46,13 @@ class Order(models.Model):
     def __str__(self):
         return self.user.first_name
 
-    # def get_total_amount(self):
-    #     total = 0
-    #     for order_item in self.items.all():
-    #         total += order_item.total_amount()
+    def get_total_amount(self):
+        total = 0
+        for order_item in self.items.all():
+            total += order_item.total_amount
 
-    #     return total
+        print(total)
+        return total
 
     class Meta:
         verbose_name = "Place Order"

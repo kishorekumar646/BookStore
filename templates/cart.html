@@ -51,23 +51,22 @@
                       <p class="mb-3 text-muted text-uppercase small"></p>{{ order_item.item.description }}
                     </div>
                     <div>
-                      <div class="def-number-input number-input safari_only mb-0 w-100">
-                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                          class="minus"></button>
-                        <input class="quantity" min="0" name="quantity" value="1" type="number">
-                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                          class="plus"></button>
+                      <div class="def-number-input number-input safari_only mb-0 w-100 mt-5">
+                        <a><i class="fas fa-minus mr-5"></i></a>
+                        {{ order_item.quantity }}
+                        <a><i class="fas fa-plus ml-5"></i></a>
+                        
                       </div>
                     </div>
                   </div>
                   <div class="d-flex justify-content-between align-items-center mt-5">
-                    <div>
+                    <div class="mt-5">
                       <a href="{{ order_item.item.get_remove_from_cart_url }}" type="button" class="btn btn-danger btn-md my-0 card-link-secondary small text-uppercase mr-3"><i
                           class="fas fa-trash-alt mr-1"></i> Remove item </a>
                       <a href="#!" type="button" class="btn btn-success btn-md my-0 card-link-secondary small text-uppercase"><i
                           class="fas fa-heart mr-1"></i> Move to wish list </a>
                     </div>
-                    <p class="mb-0"><span><strong>Rs. {{ order_item.item.price }}</strong></span></p>
+                    <p class="mb-0 mt-5"><span><strong>Rs. {{ order_item.item.price }}</strong></span></p>
                   </div>
                 </div>
               </div>
@@ -112,7 +111,7 @@
                   <p class="mb-0">(including VAT)</p>
                 </strong>
               </div>
-              <span><strong>Rs. 1278 </strong></span>
+              <span><strong>Rs. {{ object.get_total_amount|floatformat }} </strong></span>
             </li>
           </ul>
 
