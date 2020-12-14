@@ -99,16 +99,41 @@ def remove_from_cart(request, slug):
     return redirect("oreder_summary")
 
 
+def decrease_quantity(request, slug):
+    item = get_object_or_404(Book, slug=slug)
+    print(item)
+    order_item = OrderItem.objects.get(
+        item=item,
+        user=request.user,
+        ordered=False
+    )
+    order_qs = Order.objects.filter(
+        user=request.user, ordered=False)
+
+    if order_qs.exists():
+        order = order_qs[0]
+
+        if order.items.filter(item__slug=item.slug).exists() and order_item.quantity > 1:
+            print("Decrease")
+            order_item.quantity -= 1
+            order_item.save()
+            return redirect("oreder_summary")
+
+        else:
+            messages.info(request, "You can not decrease less than 1")
+            return redirect("oreder_summary")
+
+
 class OrderSummaryView(View):
 
-    def get(self,*args,**kwargs):
+    def get(self, *args, **kwargs):
         try:
             order = Order.objects.get(user=self.request.user, ordered=False)
             context = {
                 'object': order
             }
-            return render(self.request,'cart.html',context)
+            return render(self.request, 'cart.html', context)
 
         except ObjectDoesNotExist:
-            messages.info(self.request,"You do not have an active order")
-            return redirect(self.request,'oreder_summary')
+            messages.info(self.request, "You do not have an active order")
+            return redirect(self.request, 'oreder_summary')

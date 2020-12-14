@@ -13,7 +13,7 @@ ORDER_STATUS = (
 
 class OrderItem(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    item = models.ForeignKey(Book,on_delete=models.CASCADE)
+    item = models.ForeignKey(Book, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
     ordered = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -51,7 +51,6 @@ class Order(models.Model):
         for order_item in self.items.all():
             total += order_item.total_amount
 
-        print(total)
         return total
 
     class Meta:

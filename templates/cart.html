@@ -52,7 +52,7 @@
                     </div>
                     <div>
                       <div class="def-number-input number-input safari_only mb-0 w-100 mt-5">
-                        <a><i class="fas fa-minus mr-5"></i></a>
+                        <a href="{% url 'decrease_quantity' order_item.item.slug %}"><i class="fas fa-minus mr-5"></i></a>
                         {{ order_item.quantity }}
                         <a><i class="fas fa-plus ml-5"></i></a>
                         
