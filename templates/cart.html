@@ -45,16 +45,15 @@
               <div class="col-md-7 col-lg-9 col-xl-9">
                 <div>
                   <div class="d-flex justify-content-between">
-                    <div>
+                    <div class="text-justify text-wrap">
                       <h5></h5>
                       <a href="{{ order_item.item.get_absolute_url }}" class="dark-grey-text">{{ order_item.item.title }}</a>
-                      <p class="mb-3 text-muted text-uppercase small"></p>{{ order_item.item.description }}
-                    </div>
-                    <div>
-                      <div class="def-number-input number-input safari_only mb-0 w-100 mt-5">
+                      <p class="mb-3 text-muted text-uppercase small">{{ order_item.item.description }}</p>
+                    
+                      <div class="align-items-right safari_only mb-0 w-100">
                         <a href="{% url 'decrease_quantity' order_item.item.slug %}"><i class="fas fa-minus mr-5"></i></a>
                         {{ order_item.quantity }}
-                        <a><i class="fas fa-plus ml-5"></i></a>
+                        <a href="{% url 'increase_quantity' order_item.item.slug %}"><i class="fas fa-plus ml-5"></i></a>
                         
                       </div>
                     </div>

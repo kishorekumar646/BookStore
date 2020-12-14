@@ -123,6 +123,26 @@ def decrease_quantity(request, slug):
             messages.info(request, "You can not decrease less than 1")
             return redirect("oreder_summary")
 
+def increase_quantity(request, slug):
+    item = get_object_or_404(Book, slug=slug)
+    print(item)
+    order_item = OrderItem.objects.get(
+        item=item,
+        user=request.user,
+        ordered=False
+    )
+    order_qs = Order.objects.filter(
+        user=request.user, ordered=False)
+
+    if order_qs.exists():
+        order = order_qs[0]
+
+        if order.items.filter(item__slug=item.slug).exists():
+            print("increase")
+            order_item.quantity += 1
+            order_item.save()
+            return redirect("oreder_summary")
+
 
 class OrderSummaryView(View):
 
