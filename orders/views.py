@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, View
@@ -33,7 +34,7 @@ class ItemUserAutocomplete(autocomplete.Select2QuerySetView):
         return qs
 
 
-# @login_required()
+@login_required()
 def add_to_cart(request, slug):
     item = get_object_or_404(Book, slug=slug)
     order_item, created = OrderItem.objects.get_or_create(
@@ -67,6 +68,7 @@ def add_to_cart(request, slug):
     return redirect("product", slug=slug)
 
 
+@login_required()
 def remove_from_cart(request, slug):
 
     item = get_object_or_404(Book, slug=slug)
@@ -86,19 +88,20 @@ def remove_from_cart(request, slug):
             )[0]
             order.items.remove(order_item)
             messages.info(request, "The item was removed to your cart")
-            return redirect("oreder_summary")
+            return redirect("order_summary")
 
         else:
             messages.info(request, "The item was not in your cart")
-            return redirect("oreder_summary")
+            return redirect("order_summary")
 
     else:
         messages.info(request, "You don't have an active order")
-        return redirect("oreder_summary")
+        return redirect("order_summary")
 
-    return redirect("oreder_summary")
+    return redirect("order_summary")
 
 
+@login_required()
 def decrease_quantity(request, slug):
     item = get_object_or_404(Book, slug=slug)
     print(item)
@@ -117,12 +120,14 @@ def decrease_quantity(request, slug):
             print("Decrease")
             order_item.quantity -= 1
             order_item.save()
-            return redirect("oreder_summary")
+            return redirect("order_summary")
 
         else:
             messages.info(request, "You can not decrease less than 1")
-            return redirect("oreder_summary")
+            return redirect("order_summary")
 
+
+@login_required()
 def increase_quantity(request, slug):
     item = get_object_or_404(Book, slug=slug)
     print(item)
@@ -141,10 +146,10 @@ def increase_quantity(request, slug):
             print("increase")
             order_item.quantity += 1
             order_item.save()
-            return redirect("oreder_summary")
+            return redirect("order_summary")
 
 
-class OrderSummaryView(View):
+class OrderSummaryView(LoginRequiredMixin, View):
 
     def get(self, *args, **kwargs):
         try:
@@ -156,4 +161,4 @@ class OrderSummaryView(View):
 
         except ObjectDoesNotExist:
             messages.info(self.request, "You do not have an active order")
-            return redirect(self.request, 'oreder_summary')
+            return redirect(self.request, 'order_summary')

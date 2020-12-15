@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% load cart_template_tag %}
+
 
 
 {% block main_content %}
@@ -18,7 +18,7 @@
       <div class="card wish-list mb-3">
         <div class="card-body">
 
-          <h5 class="mb-4">Cart (<span>{{ request.user|cart_item_count }}</span> items)</h5>
+          
           {% for order_item in object.items.all  %}
           
             <div class="row mb-4">
@@ -119,14 +119,15 @@
               <div>
                 <strong>The total amount of</strong>
                 <strong>
-                  <p class="mb-0">(including VAT)</p>
+                  <p class="mb-0">(including GST)</p>
                 </strong>
               </div>
               <span><strong>Rs. {{ object.get_total_amount|floatformat }} </strong></span>
             </li>
           </ul>
 
-          <button type="button" class="btn btn-primary btn-block waves-effect waves-light">Place Order</button>
+          
+          <a href="{% url 'checkout' %}" type="button" class="btn btn-primary btn-block waves-effect waves-light">Place Order </a>
 
         </div>
       </div>

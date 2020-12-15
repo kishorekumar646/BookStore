@@ -1,5 +1,7 @@
 from django.conf.urls import url
-from .views import (StateAutocomplete, CityAutocomplete,PinCodeAutocomplete)
+from django.urls import path
+from .views import (StateAutocomplete, CityAutocomplete,
+                    PinCodeAutocomplete, CheckoutView)
 
 urlpatterns = [
     url(r'^state-autocomplete/$', StateAutocomplete.as_view(),
@@ -8,4 +10,5 @@ urlpatterns = [
         name='city-autocomplete'),
     url(r'^pincode-autocomplete/$', PinCodeAutocomplete.as_view(),
         name='pincode-autocomplete'),
+    path('checkout/', CheckoutView.as_view(), name='checkout')
 ]

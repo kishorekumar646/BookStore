@@ -1,6 +1,10 @@
 from django.shortcuts import render
+from django.views.generic import ListView, DetailView, View
+from django.contrib.auth.mixins import LoginRequiredMixin
 from dal import autocomplete
+from orders.models import Order
 from .models import State, City, Pincode
+from .forms import AddressForm
 
 
 class StateAutocomplete(autocomplete.Select2QuerySetView):
@@ -33,3 +37,16 @@ class PinCodeAutocomplete(autocomplete.Select2QuerySetView):
         else:
             return qs.none()
         return qs
+
+
+class CheckoutView(LoginRequiredMixin,View):
+
+    def get(self, *args, **kwargs):
+        form = AddressForm()
+        order = Order.objects.get(user=self.request.user, ordered=False)
+        context = {
+            'form': form,
+            'object': order,
+        }
+
+        return render(self.request, 'checkout.html', context)
