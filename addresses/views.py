@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.views.generic import ListView, DetailView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import ObjectDoesNotExist
 from dal import autocomplete
 from orders.models import Order
 from .models import State, City, Pincode
@@ -39,14 +41,19 @@ class PinCodeAutocomplete(autocomplete.Select2QuerySetView):
         return qs
 
 
-class CheckoutView(LoginRequiredMixin,View):
+class CheckoutView(LoginRequiredMixin, View):
 
     def get(self, *args, **kwargs):
-        form = AddressForm()
-        order = Order.objects.get(user=self.request.user, ordered=False)
-        context = {
-            'form': form,
-            'object': order,
-        }
+        try:
+            form = AddressForm()
+            order = Order.objects.get(user=self.request.user, ordered=False)
+            context = {
+                'form': form,
+                'object': order,
+            }
 
-        return render(self.request, 'checkout.html', context)
+            return render(self.request, 'checkout.html', context)
+
+        except ObjectDoesNotExist:
+            messages.info(self.request,'You don\'t have an active order')
+            return render(self.request,'cart.html')

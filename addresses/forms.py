@@ -7,7 +7,7 @@ from dal import autocomplete
 class AddressForm(forms.ModelForm):
     class Meta:
         model = Address
-        fields = '__all__'
+        fields = ['name','phone_number','pincode','locality','address','city','landmark','address_type']
 
 # class AddressForm1(forms.ModelForm):
 #     state = forms.ModelChoiceField(
