@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% load cart_count_tag %}
 
 
 {% block main_content %}
@@ -18,7 +18,7 @@
       <div class="card wish-list mb-3">
         <div class="card-body">
 
-          
+          <h5 class="mb-4">Cart (<span>{{ request.user|cart_items_count }}</span> items)</h5>
           {% for order_item in object.items.all  %}
           
             <div class="row mb-4">
