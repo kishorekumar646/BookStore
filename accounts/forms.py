@@ -55,6 +55,7 @@ class RegisterForm(UserCreationForm):
         user = super(RegisterForm, self).save(commit=False)
         user.phone_number = self.cleaned_data.get('phone_number')
         user.email = self.cleaned_data.get('email')
+        user.set_password(self.cleaned_data["password1"])
 
         if commit:
             user.save()
