@@ -18,12 +18,13 @@ class CartAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class CartProductMappingAdmin(admin.ModelAdmin):
+    pass
     # form = OrderUserForm
-    fieldsets = (
-        (_('Order info'), {'fields': ('user', 'items')}),
-        (_('Important dates'), {'fields': ('start_date', 'ordered_date')}),
-    )
-    list_display = ('user','ordered')
-    list_filter = ('start_date', 'ordered_date',)
-    search_fields = ('user',)
-    readonly_fields = ('start_date', 'ordered_date',)
+    # fieldsets = (
+    #     (_('Order info'), {'fields': ('user', 'items')}),
+    #     (_('Important dates'), {'fields': ('start_date', 'ordered_date')}),
+    # )
+    # list_display = ('user','ordered')
+    # list_filter = ('start_date', 'ordered_date',)
+    # search_fields = ('user',)
+    # readonly_fields = ('start_date', 'ordered_date',)

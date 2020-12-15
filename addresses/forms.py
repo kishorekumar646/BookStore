@@ -1,13 +1,14 @@
 from django import forms
 from django.core.validators import RegexValidator
-from .models import (State, City, Pincode, Address,)
+from .models import Address
 from dal import autocomplete
 
 
 class AddressForm(forms.ModelForm):
     class Meta:
         model = Address
-        fields = ['name','phone_number','pincode','locality','address','city','landmark','address_type']
+        fields = ['name', 'phone_number', 'pincode', 'locality',
+                  'address', 'city', 'landmark', 'address_type']
 
 # class AddressForm1(forms.ModelForm):
 #     state = forms.ModelChoiceField(
