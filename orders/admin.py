@@ -18,7 +18,7 @@ class CartAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class CartProductMappingAdmin(admin.ModelAdmin):
-    form = OrderUserForm
+    # form = OrderUserForm
     fieldsets = (
         (_('Order info'), {'fields': ('user', 'items')}),
         (_('Important dates'), {'fields': ('start_date', 'ordered_date')}),
