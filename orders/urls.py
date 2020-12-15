@@ -11,7 +11,7 @@ urlpatterns = [
         name='item-user-autocomplete'),
     path('add_to_cart/<slug>/', add_to_cart, name='add_to_cart'),
     path('remove_from_cart/<slug>/', remove_from_cart, name='remove_from_cart'),
-    path('order_summary/', OrderSummaryView.as_view(), name="order_summary"),
+    path('order_summary/', OrderSummaryView.as_view(), name='order_summary'),
     path('decrease_quantity/<slug>/', decrease_quantity, name='decrease_quantity'),
     path('increase_quantity/<slug>/', increase_quantity, name='increase_quantity'),
 ]
