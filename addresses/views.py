@@ -64,6 +64,9 @@ class SucessView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
             order = Order.objects.get(user=self.request.user, ordered=True)
+            for item in order.items.all():
+                item.ordered = True
+                item.save()
             context = {
                 'object': order
             }
