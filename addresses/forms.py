@@ -11,9 +11,17 @@ class AddressForm(forms.ModelForm):
                   'address', 'city', 'landmark', 'address_type']
 
     def save(self, commit=True):
-        address = super(AddressForm, self).save(commit=False)
-        address.name = self.cleaned_data.get('name')
-        print(address.name)
+        bill_address = super(AddressForm, self).save(commit=False)
+        bill_address.name = self.cleaned_data.get('name')
+        bill_address.phone_number = self.cleaned_data.get('phone_number')
+        bill_address.pincode = self.cleaned_data.get('pincode')
+        bill_address.locality = self.cleaned_data.get('locality')
+        bill_address.address = self.cleaned_data.get('address')
+        bill_address.city = self.cleaned_data.get('city')
+        bill_address.landmark = self.cleaned_data.get('landmark')
+        bill_address.address_type = self.cleaned_data.get('address_type')
+
+        return bill_address
 
 
 # class AddressForm1(forms.ModelForm):

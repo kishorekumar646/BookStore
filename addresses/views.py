@@ -37,15 +37,27 @@ class CheckoutView(LoginRequiredMixin, View):
     def post(self, *args, **kwargs):
 
         form = AddressForm(self.request.POST or None)
-        print(form.errors)
-        if form.is_valid():
-            print("Form is valid")
-            print(self.request.POST)
-            form.save()
-            return redirect('success')
+        try:
+            order = Order.objects.get(user=self.request.user, ordered=False)
+            print(form.errors)
+            if form.is_valid():
+                print("Form is valid")
+                print(self.request.POST)
+                bill_address = form.save()
+                bill_address.user = self.request.user
+                bill_address.save()
+                order.billing_address = bill_address
+                order.ordered = True
+                order.save()
+                return redirect('success')
 
-        else:
-            return redirect('checkout')
+            else:
+                messages.info(self.request,'%s' % form.errors)
+                return redirect('checkout')
+
+        except ObjectDoesNotExist:
+            return redirect('order_summary')
+        
 
 
 class SucessView(LoginRequiredMixin, View):
