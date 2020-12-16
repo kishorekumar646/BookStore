@@ -34,6 +34,18 @@ class CheckoutView(LoginRequiredMixin, View):
             messages.info(self.request, 'You don\'t have an active order')
             return render(self.request, 'cart.html')
 
+    def post(self, *args, **kwargs):
+
+        form = AddressForm(self.request.POST or None)
+        print(form.errors)
+        if form.is_valid():
+            print("Form is valid")
+            print(self.request.POST)
+            return redirect('success')
+
+        else:
+            return redirect('checkout')
+
 
 class SucessView(LoginRequiredMixin, View):
 

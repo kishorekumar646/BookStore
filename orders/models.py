@@ -42,6 +42,8 @@ class Order(models.Model):
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)
+    billing_address = models.ForeignKey(
+        Address, related_name='billing_address', on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
         return self.user.first_name

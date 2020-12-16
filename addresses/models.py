@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 from bookstore_backend.validators import (
     AddressNameValidator, MobileNumberValidator, PinCodeValidator, NameValidator)
 from django.utils.translation import ugettext_lazy as _
@@ -11,15 +12,16 @@ ADRESS_TYPE_CHOICE = (
 
 
 class Address(models.Model):
-    name = models.CharField(max_length=255, null=True, blank=True)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    name = models.CharField(max_length=255,)
     phone_number = models.CharField(
-        validators=[MobileNumberValidator], max_length=10, blank=True)
+        validators=[MobileNumberValidator], max_length=10)
     pincode = models.CharField(
-        validators=[PinCodeValidator], max_length=6, blank=True)
-    locality = models.CharField(max_length=20, blank=True)
-    address = models.CharField(max_length=50,null=True,blank=True)
-    city = models.CharField(max_length=50,null=True,blank=True)
-    landmark = models.CharField(max_length=50,null=True,blank=True)
+        validators=[PinCodeValidator], max_length=6)
+    locality = models.CharField(max_length=20,)
+    address = models.CharField(max_length=50,)
+    city = models.CharField(max_length=50,)
+    landmark = models.CharField(max_length=50,)
     address_type = models.CharField(
         max_length=255, choices=ADRESS_TYPE_CHOICE, default='home')
     created_at = models.DateTimeField(auto_now_add=True)
@@ -30,4 +32,4 @@ class Address(models.Model):
         ordering = ['-id']
 
     def __str__(self):
-        return "%s" % (self.name)
+        return "%s" % (self.user.first_name)
