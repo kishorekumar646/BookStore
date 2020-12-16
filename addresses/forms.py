@@ -10,6 +10,12 @@ class AddressForm(forms.ModelForm):
         fields = ['name', 'phone_number', 'pincode', 'locality',
                   'address', 'city', 'landmark', 'address_type']
 
+    def save(self, commit=True):
+        address = super(AddressForm, self).save(commit=False)
+        address.name = self.cleaned_data.get('name')
+        print(address.name)
+
+
 # class AddressForm1(forms.ModelForm):
 #     state = forms.ModelChoiceField(
 #         queryset=State.objects.all(),

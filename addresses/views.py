@@ -41,6 +41,7 @@ class CheckoutView(LoginRequiredMixin, View):
         if form.is_valid():
             print("Form is valid")
             print(self.request.POST)
+            form.save()
             return redirect('success')
 
         else:

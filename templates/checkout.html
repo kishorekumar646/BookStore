@@ -57,7 +57,7 @@
       <div class="card mb-3">
         <div class="card-body">
 
-          <form>
+          <form method="POST">
             {% csrf_token %}
             <div class="row">
               <div class="col-md-6">
@@ -114,11 +114,14 @@
                       {{ form.landmark }}
                   </div>
               </div>
-                
-            
-                
+              <div class="col-md-12"> 
+                  <label class="mb-1">
+                      <h6 class="mb-0 text-sm">Address Type</h6>
+                  </label>
+                  {{ form.address_type }}
+              </div>
             </div>
-            <a href="{% url 'success' %}" type="button" class="btn btn-primary waves-effect waves-light">CHECKOUT</a>
+            <button type="submit" class="btn btn-blue text-center">CHECKOUT</button>
           </form>
 
         </div>
