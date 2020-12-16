@@ -33,3 +33,10 @@ class CheckoutView(LoginRequiredMixin, View):
         except ObjectDoesNotExist:
             messages.info(self.request, 'You don\'t have an active order')
             return render(self.request, 'cart.html')
+
+
+class SucessView(LoginRequiredMixin, View):
+
+    def get(self, *args, **kwargs):
+
+        return render(self.request,'success.html',{})
