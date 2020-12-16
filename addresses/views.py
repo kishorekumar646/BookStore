@@ -52,16 +52,22 @@ class CheckoutView(LoginRequiredMixin, View):
                 return redirect('success')
 
             else:
-                messages.info(self.request,'%s' % form.errors)
+                messages.info(self.request, '%s' % form.errors)
                 return redirect('checkout')
 
         except ObjectDoesNotExist:
             return redirect('order_summary')
-        
 
 
 class SucessView(LoginRequiredMixin, View):
 
     def get(self, *args, **kwargs):
+        try:
+            order = Order.objects.get(user=self.request.user, ordered=True)
+            context = {
+                'object': order
+            }
+            return render(self.request, 'success.html', context)
 
-        return render(self.request,'success.html',{})
+        except ObjectDoesNotExist:
+            return redirect('order_summary')
