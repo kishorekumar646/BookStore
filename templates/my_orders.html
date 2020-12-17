@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block main_content %}
+
+<!--Grid row-->
+  <div class="ml-5">
+
+    <!--Grid column-->
+    <div class="col-lg-7">
+
+      <!-- Card -->
+      <div class="card wish-list mb-3">
+        <div class="card-body">
+
+        
+          {% for order_item in object.items.all  %}
+          
+            <div class="row mb-4">
+              <div class="col-md-5 col-lg-3 col-xl-3">
+
+                {% if order_item.item.image_cover %}
+
+                  <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                    <img class="img-fluid w-100"
+                      src="{{ order_item.item.image_cover.url }}" alt="Sample">
+                    <a href="#!">
+
+                      <div class="mask waves-effect waves-light">
+                        <img class="img-fluid w-100"
+                          src="{{ order_item.item.image_cover.url }}">
+                        <div class="mask rgba-black-slight waves-effect waves-light"></div>
+                      </div>
+                    </a>
+                  </div>
+
+                {% endif %}
+
+              </div>
+              <div class="col-md-7 col-lg-9 col-xl-9">
+                <div>
+                  <div class="d-flex justify-content-between">
+                    <div class="text-justify text-wrap">
+                      <h5></h5>
+                      <a href="{{ order_item.item.get_absolute_url }}" class="dark-grey-text">{{ order_item.item.title }}</a>
+                      <p class="mb-3 text-muted small">{{ order_item.item.description }}</p>
+                    
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center mt-5">
+                    
+                    <p class="mb-0 mt-5"><span><strong>Rs. {{ order_item.item.price }}</strong></span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr class="mb-4">
+            {% empty %}
+            <div class="row justify-content-center mb-2 border-line"> 
+              <img src="{% static 'img/svg/empty_cart.svg' %}" class="image">
+              <div class="justify-content-center">
+                <h1>Your cart is empty!</h1>
+                <p class="mt-5 text-muted small ">Add items to it now.</p>
+                <a href="{% url 'home' %}" class="btn btn-primary btn-md my-0">Shop now
+            </a>
+              </div>
+            </div>
+            
+
+
+          {% endfor %}
+
+        </div>
+      </div>
+      <!-- Card -->
+
+    </div>
+    <!--Grid column-->
+
+  </div>
+  <!--Grid row-->
+
+
+{% endblock main_content %}
