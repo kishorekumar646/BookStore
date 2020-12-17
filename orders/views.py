@@ -162,3 +162,17 @@ class OrderSummaryView(LoginRequiredMixin, View):
 
         except ObjectDoesNotExist:
             return render(self.request, 'cart.html')
+
+
+class MyOrders(LoginRequiredMixin, View):
+
+    def get(self, *args, **kwargs):
+        try:
+            order = Order.objects.get(user=self.request.user, ordered=True)
+            context = {
+                'object': order
+            }
+            return render(self.request, 'my_orders.html', context)
+
+        except ObjectDoesNotExist:
+            return render(self.request, 'home.html')

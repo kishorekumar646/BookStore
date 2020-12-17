@@ -39,7 +39,9 @@
           </li>
           <li class="dropdown nav-item"><a class="nav-link waves-effect white-text" data-toggle="dropdown">Welcome, {{ request.user.first_name }} {{ request.user.last_name}} <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                  <li><a href="{% url 'logout' %}"><i class="icon-off"></i> Logout</a></li>
+                  <li><a href="{% url 'my_orders' %}"><i class="icon-off"></i>Wishlist</a></li>
+                  <li><a href="{% url 'my_orders' %}"><i class="icon-off"></i>My Orders</a></li>
+                  <li><a href="{% url 'logout' %}"><i class="icon-off"></i>Logout</a></li>
               </ul>
           </li>
           

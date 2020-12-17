@@ -14,9 +14,34 @@
                 </div>
             </div>
             <div class="col-lg-5">
+                <div class="alert-dismissible alert-danger text-center" role="alert">
+                    {% if form.errors %}
+                        {{ form.errors|striptags }}
+                    {% else %}
+                        {{ form.non_field_errors|striptags }}
+                    {% endif %}
+                </div>
                 <form action="" method="POST">
                     {% csrf_token %}
                     <div class="card2 card border-0 px-4 py-5">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="mb-1">
+                                        <h6 class="mb-0 text-sm">First Name</h6>
+                                    </label>
+                                    {{ form.first_name }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="mb-1">
+                                        <h6 class="mb-0 text-sm">Last Name</h6>
+                                    </label> 
+                                    {{ form.last_name }}
+                                </div>
+                            </div>
+                        </div>
                         <div class="row px-3"> 
                             <label class="mb-1">
                                 <h6 class="mb-0 text-sm">Phone number</h6>
@@ -51,13 +76,7 @@
                         <div class="row mb-2 px-3"> <small class="font-weight-bold">I have an account? <a href="{% url 'login' %}" class="text-danger ">Login</a></small> </div>
                     </div>
                 </form>
-                <div class="alert-dismissible alert-danger text-center" role="alert">
-                    {% if form.phone_number.errors %}
-                        {{ form.phone_number.errors|striptags }}
-                    {% else %}
-                        {{ form.non_field_errors|striptags }}
-                    {% endif %}
-                </div>
+                
             </div>
         </div>
     </div>

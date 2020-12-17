@@ -2,7 +2,7 @@ from django.conf.urls import url, include
 from django.urls import path
 from .views import (add_to_cart, OrderUserAutocomplete,
                     ItemUserAutocomplete, remove_from_cart, decrease_quantity,
-                    increase_quantity, OrderSummaryView)
+                    increase_quantity, OrderSummaryView,MyOrders)
 
 urlpatterns = [
     url(r'^order-user-autocomplete/$', OrderUserAutocomplete.as_view(),
@@ -14,4 +14,5 @@ urlpatterns = [
     path('order_summary/', OrderSummaryView.as_view(), name='order_summary'),
     path('decrease_quantity/<slug>/', decrease_quantity, name='decrease_quantity'),
     path('increase_quantity/<slug>/', increase_quantity, name='increase_quantity'),
+    path('my_orders/',MyOrders.as_view(),name='my_orders'),
 ]

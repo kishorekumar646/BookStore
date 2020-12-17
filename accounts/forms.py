@@ -39,20 +39,24 @@ class RegisterForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['phone_number', 'password1', 'password2', 'email']
+        fields = ['first_name','last_name','phone_number', 'password1', 'password2', 'email']
         widgets = {
+            'first_name': forms.TextInput(attrs={'placeholder': 'Enter your first name', 'class': 'mb-4'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Enter your last name', 'class': 'mb-4'}),
             'password1': forms.PasswordInput(attrs={'placeholder': 'Enter a password', 'class': 'mb-4'}),
             'password2': forms.PasswordInput(attrs={'placeholder': 'Enter a confirm password', 'class': 'mb-4'}),
             'phone_number': forms.TextInput(attrs={'placeholder': 'Enter a valid phone number', 'class': 'mb-4'}),
-            'email': forms.TextInput(attrs={'placeholder': 'Enter a valid phone number', 'class': 'mb-4'})
+            'email': forms.TextInput(attrs={'placeholder': 'Enter a valid phone number', 'class': 'mb-4'}),
         }
 
     def clean(self, *args, **kwargs):
-
+        
         return super(RegisterForm, self).clean(*args, **kwargs)
 
     def save(self, commit=True):
         user = super(RegisterForm, self).save(commit=False)
+        user.first_name = self.cleaned_data.get('first_name')
+        user.last_name = self.cleaned_data.get('last_name')
         user.phone_number = self.cleaned_data.get('phone_number')
         user.email = self.cleaned_data.get('email')
         user.set_password(self.cleaned_data["password1"])

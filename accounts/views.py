@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
 from django.views import View
+from django.contrib import messages
 from .forms import LoginForm, RegisterForm
 
 
@@ -49,6 +50,7 @@ class Register(View):
             print(request.POST)
             user = form.save()
             user.save()
+            messages.info(self.request, "Successfully registered")
             return redirect('login')
         else:
             return render(request,'accounts/register.html',{'form': form})
