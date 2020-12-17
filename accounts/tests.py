@@ -7,6 +7,7 @@ import unittest
 
 client = Client()
 
+
 @pytest.mark.django_db
 class test_TestURLs(unittest.TestCase):
 
@@ -18,3 +19,12 @@ class test_TestURLs(unittest.TestCase):
         response = client.post(path=url, data=userData, format='json')
 
         self.assertEqual(response.status_code, 406)
+
+    def test_RegistarationOnSubmit_ThenReturn_HTTP_200_OK(self):
+        url = BASE_URL + reverse("register")
+        userData = {'first_name': 'Rakhi', 'last_name': 'R', 'phone_number': '9887889767',
+                    'password1': 'Rakhikumar@123', 'password2': 'Rakhikumar@123', 'email': 'rakesh333@gmail.com'}
+
+        response = client.post(path=url, data=userData, format='json')
+
+        self.assertEqual(response.status_code, 200)
