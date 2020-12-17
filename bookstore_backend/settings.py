@@ -29,6 +29,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 AUTH_USER_MODEL = 'accounts.user'
 
+BASE_URL = 'http://127.0.0.1:8000'
 
 # Application definition
 
