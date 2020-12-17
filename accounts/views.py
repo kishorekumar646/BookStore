@@ -3,6 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
 from django.views import View
 from django.contrib import messages
+from bookstore_backend import status
 from .forms import LoginForm, RegisterForm
 
 
@@ -45,7 +46,6 @@ class Register(View):
     def post(self, request):
 
         form = RegisterForm(request.POST)
-        print(form.errors)
         if form.is_valid():
             print(request.POST)
             user = form.save()
@@ -53,7 +53,7 @@ class Register(View):
             messages.info(self.request, "Successfully registered")
             return redirect('login')
         else:
-            return render(request,'accounts/register.html',{'form': form})
+            return render(request, 'accounts/register.html', {'form': form}, status=status.HTTP_406_NOT_ACCEPTABLE)
 
 
 class Logout(View):
