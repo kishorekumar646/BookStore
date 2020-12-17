@@ -28,3 +28,11 @@ class test_TestURLs(unittest.TestCase):
         response = client.post(path=url, data=userData, format='json')
 
         self.assertEqual(response.status_code, 200)
+
+    def test_LoginOnSubmit_ThenReturn_HTTP_200_OK(self):
+        url = BASE_URL + reverse("login")
+        userData = {'phone_number': '9887889767', 'password': 'Rakhikumar@123'}
+
+        response = client.post(path=url, data=userData, format='json')
+
+        self.assertEqual(response.status_code, 200)

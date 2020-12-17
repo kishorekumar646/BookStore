@@ -13,7 +13,7 @@ class Login(View):
         print(request.user)
         if not request.user.is_authenticated:
             form = LoginForm()
-            return render(request, "accounts/login.html", {'form': form},status=status.HTTP_200_OK)
+            return render(request, "accounts/login.html", {'form': form}, status=status.HTTP_200_OK)
 
         else:
             return redirect('home')
@@ -52,7 +52,7 @@ class Register(View):
             user = form.save()
             user.save()
             messages.info(self.request, "Successfully registered")
-            return redirect('login',status=status.HTTP_200_OK)
+            return redirect('login')
         else:
             return render(request, 'accounts/register.html', {'form': form}, status=status.HTTP_406_NOT_ACCEPTABLE)
 
