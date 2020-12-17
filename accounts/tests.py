@@ -7,10 +7,10 @@ import unittest
 
 client = Client()
 
-
+@pytest.mark.django_db
 class test_TestURLs(unittest.TestCase):
 
-    def test_RegisterView(self):
+    def test_RegistarationOnSubmit_ThenReturn_HTTP_406_NOT_ACCEPTABLE(self):
         url = BASE_URL + reverse("register")
         userData = {'first_name': '', 'last_name': '', 'phone_number': '',
                     'password1': '', 'password2': '', 'email': ''}
