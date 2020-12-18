@@ -8,6 +8,9 @@ from .forms import LoginForm, RegisterForm
 
 
 class Login(View):
+    '''
+    Login page for user
+    '''
 
     def get(self, request):
         print(request.user)
@@ -34,6 +37,9 @@ class Login(View):
 
 
 class Register(View):
+    '''
+    Register page for user
+    '''
 
     def get(self, request):
         if not request.user.is_authenticated:
@@ -58,6 +64,9 @@ class Register(View):
 
 
 class Logout(View):
+    '''
+    Login view
+    '''
 
     def get(self, request):
         logout(request)

@@ -15,6 +15,9 @@ User = get_user_model()
 
 
 class OrderUserAutocomplete(autocomplete.Select2QuerySetView):
+    '''
+    Filters all users
+    '''
     def get_queryset(self):
         qs = User.objects.all()
         if self.q:
@@ -23,6 +26,9 @@ class OrderUserAutocomplete(autocomplete.Select2QuerySetView):
 
 
 class ItemUserAutocomplete(autocomplete.Select2QuerySetView):
+    '''
+    Filters Item with user
+    '''
     def get_queryset(self, *args, **kwargs):
         qs = OrderItem.objects.all()
         user_id = self.forwarded.get('user', None)
@@ -36,6 +42,9 @@ class ItemUserAutocomplete(autocomplete.Select2QuerySetView):
 
 @login_required()
 def add_to_cart(request, slug):
+    '''
+        Item in add to cart
+    '''
     item = get_object_or_404(Book, slug=slug)
     order_item, created = OrderItem.objects.get_or_create(
         item=item,
@@ -70,7 +79,9 @@ def add_to_cart(request, slug):
 
 @login_required()
 def remove_from_cart(request, slug):
-
+    '''
+        Item in remove from cart
+    '''
     item = get_object_or_404(Book, slug=slug)
     order_qs = Order.objects.filter(
         user=request.user,
@@ -104,6 +115,9 @@ def remove_from_cart(request, slug):
 
 @login_required()
 def decrease_quantity(request, slug):
+    '''
+        decrease quantity for item in cart
+    '''
     item = get_object_or_404(Book, slug=slug)
     print(item)
     order_item = OrderItem.objects.get(
@@ -130,6 +144,9 @@ def decrease_quantity(request, slug):
 
 @login_required()
 def increase_quantity(request, slug):
+    '''
+        increase quantity for item in cart
+    '''
     item = get_object_or_404(Book, slug=slug)
     print(item)
     order_item = OrderItem.objects.get(
@@ -151,6 +168,9 @@ def increase_quantity(request, slug):
 
 
 class OrderSummaryView(LoginRequiredMixin, View):
+    '''
+        get the all item in cart
+    '''
 
     def get(self, *args, **kwargs):
         try:
@@ -165,7 +185,9 @@ class OrderSummaryView(LoginRequiredMixin, View):
 
 
 class MyOrders(LoginRequiredMixin, View):
-
+    '''
+        get the items for ordered
+    '''
     def get(self, *args, **kwargs):
         try:
             order = Order.objects.get(user=self.request.user, ordered=True)

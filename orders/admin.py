@@ -6,6 +6,9 @@ from .forms import OrderUserForm
 
 @admin.register(OrderItem)
 class CartAdmin(admin.ModelAdmin):
+    '''
+    Cart
+    '''
     fieldsets = (
         (_('Cart info'), {'fields': ('user', 'item', 'quantity')}),
         (_('Important dates'), {'fields': ('created_at', 'modified_at')}),
@@ -18,6 +21,9 @@ class CartAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class CartProductMappingAdmin(admin.ModelAdmin):
+    '''
+    Place Order
+    '''
     # form = OrderUserForm
     fieldsets = (
         (_('Order info'), {'fields': ('user', 'items','billing_address')}),

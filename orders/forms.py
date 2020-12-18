@@ -5,6 +5,9 @@ from .models import Order
 
 
 class OrderUserForm(forms.ModelForm):
+    '''
+    Model Form
+    '''
     user = forms.ModelChoiceField(
         queryset=get_user_model().objects.all(),
         widget=autocomplete.ModelSelect2(

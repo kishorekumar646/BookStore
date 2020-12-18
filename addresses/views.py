@@ -10,6 +10,9 @@ from .forms import AddressForm
 
 
 class CheckoutView(LoginRequiredMixin, View):
+    '''
+    Checkout Form
+    '''
 
     def get(self, *args, **kwargs):
         try:
@@ -60,6 +63,9 @@ class CheckoutView(LoginRequiredMixin, View):
 
 
 class SucessView(LoginRequiredMixin, View):
+    '''
+    successfully order items details
+    '''
 
     def get(self, *args, **kwargs):
         try:

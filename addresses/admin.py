@@ -6,7 +6,9 @@ from import_export.admin import ImportExportModelAdmin
 
 
 class AddressAdmin(admin.ModelAdmin):
-    pass
+    '''
+    AddressForm Admin
+    '''
     # form = AddressForm
     fieldsets = (
         (_('Bill Address info'), {'fields': ('user', 'name', 'phone_number', 'pincode', 'locality', 'address', 'city', 'landmark', 'address_type',)}),

@@ -5,6 +5,9 @@ from dal import autocomplete
 
 
 class AddressForm(forms.ModelForm):
+    '''
+    Billing Address
+    '''
     class Meta:
         model = Address
         fields = ['name', 'phone_number', 'pincode', 'locality',
