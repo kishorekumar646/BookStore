@@ -99,7 +99,9 @@ WSGI_APPLICATION = 'bookstore_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': config('DB_NAME'),
         'USER': config('DB_USER'),
         'PASSWORD': config('DB_PASSWORD'),
@@ -139,7 +141,8 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+#It has to be make it False other wise will face issue AssertionError: database connection isn't set to UTC
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -165,7 +168,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': '/home/krish/Documents/debug.log',
+            'filename': config('DEBUG_FILE_PATH')
         }
     }
 }
